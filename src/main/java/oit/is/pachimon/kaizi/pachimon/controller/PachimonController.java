@@ -10,14 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import oit.is.inudaisuki.springboot_samples.model.Room;
+import oit.is.pachimon.kaizi.pachimon.model.Room;
 
 @Controller
 @RequestMapping("/pachimon")
 public class PachimonController {
+  @Autowired
+  private Room room;
 
   @GetMapping("step1")
   public String sample31() {
     return "home.html";
   }
+
+  @GetMapping("step2")
+  public String sample32(ModelMap model, Principal prin) {
+    String loginUser = prin.getName(); // ログインユーザ情報
+    model.addAttribute("login_user", loginUser);
+    return "home.html";
+  }
+
+  @GetMapping("step8")
+  public String sample38(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("room", this.room);
+
+    return "home.html";
+  }
+
 }
