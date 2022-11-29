@@ -34,8 +34,9 @@ public class PachimonController {
   public String sample38(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
+    int usersNum = this.room.getUsersNum();
     model.addAttribute("room", this.room);
-
+    model.addAttribute("usersNum", usersNum);//usersNum変数をhtmlで使えるようにモデルに登録
     return "home.html";
   }
 
