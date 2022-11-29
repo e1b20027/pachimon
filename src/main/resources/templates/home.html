@@ -29,7 +29,9 @@
       <li th:each="user : ${room.users}">[[${user}]]</li>
       <li>現在ログイン人数:[[${usersNum}]]</li>
     </ul>
-    <a href="/pachimon/step9">ゲーム開始！</a>
+    <th:block th:if="${usersNum==2}">
+      <a href="/pachimon/step9">ゲーム開始！</a>
+    </th:block>
   </div>
 </body>
 
