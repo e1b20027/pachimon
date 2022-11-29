@@ -34,6 +34,11 @@ public class Room {
     return users;
   }
 
+  public int getUsersNum() {
+    int Num = users.size();
+    return Num;
+  }
+
   public void setUsers(ArrayList<String> users) {
     this.users = users;
   }
