@@ -1,5 +1,6 @@
 package oit.is.pachimon.kaizi.pachimon.controller;
 
+import java.util.ArrayList;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,13 @@ public class PachimonController {
   }
 
   @GetMapping("step9")
-  public String sample39() {
+  public String sample39(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("login_user", loginUser);
+    ArrayList<String> u = room.getUsers();
+    model.addAttribute("login_users", u);
     return "battle.html";
   }
+
 }

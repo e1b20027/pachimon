@@ -1,1 +1,15 @@
-aaaaaa
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="utf-8">
+  <title>Pachimonゲーム</title>
+</head>
+
+<body>
+  <h1>バトル</h1>
+  <p>[[${login_user}]]さん ログイン中</p>
+  <h2>[[${login_users[0]}]] VS [[${login_users[1]}]]</h2>
+</body>
+
+</html>
