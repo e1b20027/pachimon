@@ -51,4 +51,37 @@ public class PachimonController {
     return "battle.html";
   }
 
+  @GetMapping("honou")
+  public String honou(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("login_user", loginUser);
+    ArrayList<String> u = room.getUsers();
+    model.addAttribute("login_users", u);
+    model.addAttribute("hand", "ほのお");
+    return "battle.html";
+  }
+
+  @GetMapping("mizu")
+  public String mizu(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("login_user", loginUser);
+    ArrayList<String> u = room.getUsers();
+    model.addAttribute("login_users", u);
+    model.addAttribute("hand", "みず");
+    return "battle.html";
+  }
+
+  @GetMapping("kusa")
+  public String kusa(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("login_user", loginUser);
+    ArrayList<String> u = room.getUsers();
+    model.addAttribute("login_users", u);
+    model.addAttribute("hand", "くさ");
+    return "battle.html";
+  }
+
 }

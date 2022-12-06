@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class Room {
   ArrayList<String> users = new ArrayList<>();
   int roomNo = 99;
+  String hand;
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -43,4 +44,11 @@ public class Room {
     this.users = users;
   }
 
+  public void setHand(String h) {
+    this.hand = h;
+  }
+
+  public String getHand() {
+    return this.hand;
+  }
 }
