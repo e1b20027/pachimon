@@ -10,6 +10,12 @@
   <h1>バトル</h1>
   <p>[[${login_user}]]さん ログイン中</p>
   <h2>[[${login_users[0]}]] VS [[${login_users[1]}]]</h2>
+    <a href="/pachimon/honou">ほのお</a>
+    <a href="/pachimon/mizu">みず</a>
+    <a href="/pachimon/kusa">くさ</a>
+    <div th:if = "${hand}">
+      <a>あなたの手は[[${hand}]]です</a>
+    <div>
 </body>
 
 </html>
