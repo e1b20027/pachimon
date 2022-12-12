@@ -35,9 +35,8 @@ public class PachimonController {
   public String sample38(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
-    int usersNum = this.room.getUsersNum();
     model.addAttribute("room", this.room);
-    model.addAttribute("usersNum", usersNum);// usersNum変数をhtmlで使えるようにモデルに登録
+    model.addAttribute("usersNum", this.room.getUsersNum());// usersの要素数をhtmlで使えるように登録
     return "home.html";
   }
 
@@ -46,41 +45,47 @@ public class PachimonController {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
-    ArrayList<String> u = room.getUsers();
-    model.addAttribute("login_users", u);
+    model.addAttribute("login_users", room.getUsers());
     return "battle.html";
   }
 
   @GetMapping("honou")
   public String honou(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
+    int cnt = this.room.checkSetUser(loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
-    ArrayList<String> u = room.getUsers();
-    model.addAttribute("login_users", u);
-    model.addAttribute("hand", "ほのお");
+    model.addAttribute("login_users", this.room.getUsers());
+    this.room.setHand("ほのお", cnt);
+    model.addAttribute("hand", this.room.getHand(cnt));
+    model.addAttribute("handsNum", this.room.getHandsNum());
     return "battle.html";
   }
 
   @GetMapping("mizu")
   public String mizu(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
+    int cnt = this.room.checkSetUser(loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
-    ArrayList<String> u = room.getUsers();
-    model.addAttribute("login_users", u);
-    model.addAttribute("hand", "みず");
+    model.addAttribute("login_users", this.room.getUsers());
+    this.room.setHand("みず", cnt);
+    model.addAttribute("hand", this.room.getHand(cnt));
+    model.addAttribute("handsNum", this.room.getHandsNum());
     return "battle.html";
   }
 
   @GetMapping("kusa")
   public String kusa(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
+    int cnt=this.room.checkSetUser(loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
-    ArrayList<String> u = room.getUsers();
-    model.addAttribute("login_users", u);
-    model.addAttribute("hand", "くさ");
+    model.addAttribute("login_users", this.room.getUsers());
+    this.room.setHand("くさ", cnt);
+    model.addAttribute("hand", this.room.getHand(cnt));
+    model.addAttribute("num", cnt);
+    model.addAttribute("handsNum", this.room.getHandsNum());
     return "battle.html";
   }
 

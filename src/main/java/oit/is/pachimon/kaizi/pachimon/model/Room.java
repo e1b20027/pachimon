@@ -1,6 +1,7 @@
 package oit.is.pachimon.kaizi.pachimon.model;
 
 import java.util.ArrayList;
+import java.util.concurrent.Flow.Publisher;
 
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class Room {
   ArrayList<String> users = new ArrayList<>();
   int roomNo = 99;
+  ArrayList<String> hands = new ArrayList<>();
   String hand;
 
   public void addUser(String name) {
@@ -21,6 +23,17 @@ public class Room {
     this.users.add(name);
   }
 
+  public int checkSetUser(String name) {
+    int cnt = 0;
+    for (String s : this.users) {
+      if (s.equals(name)) {
+        break;
+      }
+      cnt++;
+    }
+    return cnt;
+  }
+
   // 以降はフィールドのgetter/setter
   // これらがないとThymeleafで値を取得できない
   public int getRoomNo() {
@@ -32,23 +45,23 @@ public class Room {
   }
 
   public ArrayList<String> getUsers() {
-    return users;
+    return this.users;
   }
 
   public int getUsersNum() {
-    int Num = users.size();
-    return Num;
+    return this.users.size();
   }
 
-  public void setUsers(ArrayList<String> users) {
-    this.users = users;
+  public void setHand(String hand,int cnt) {
+    this.hands.add(cnt,hand);
   }
 
-  public void setHand(String h) {
-    this.hand = h;
+  public String getHand(int cnt) {
+    return this.hands.get(cnt);
   }
 
-  public String getHand() {
-    return this.hand;
+  public int getHandsNum() {
+    return this.hands.size();
   }
+
 }
