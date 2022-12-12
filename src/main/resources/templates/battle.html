@@ -16,7 +16,7 @@
     <div th:if = "${hand}">
       <a>あなたの手は[[${hand}]]です</a>
     <div>
-    <th:block th:if="${handsNum>=2}">
+    <th:block th:if="${handsNum==2}">
       <p>結果だよ</p>
     </th:block>
 </body>
