@@ -18,9 +18,8 @@
     <div>あなたはユーザですね</div>
   </div>
   <a href="/logout">ログアウト</a>
-  <a href="/pachimon/step8">入室(DI)</a>
+  <a href="/pachimon/UserNum">参加者一覧</a>
   <div th:if="${room}">
-    DI利用
     <ul>
       <!--roomオブジェクトのroomNoというフィールドを指定している-->
       <li>RoomNo:[[${room.roomNo}]]</li>
@@ -30,7 +29,7 @@
       <li>現在ログイン人数:[[${usersNum}]]</li>
     </ul>
     <th:block th:if="${usersNum==2}">
-      <a href="/pachimon/step9">ゲーム開始！</a>
+      <a href="/pachimon/start">ゲーム開始！</a>
     </th:block>
   </div>
 </body>

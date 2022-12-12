@@ -19,19 +19,12 @@ public class PachimonController {
   @Autowired
   private Room room;
 
-  @GetMapping("step1")
+  @GetMapping("goHome")
   public String sample31() {
     return "home.html";
   }
 
-  @GetMapping("step2")
-  public String sample32(ModelMap model, Principal prin) {
-    String loginUser = prin.getName(); // ログインユーザ情報
-    model.addAttribute("login_user", loginUser);
-    return "home.html";
-  }
-
-  @GetMapping("step8")
+  @GetMapping("UserNum")
   public String sample38(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
@@ -40,10 +33,11 @@ public class PachimonController {
     return "home.html";
   }
 
-  @GetMapping("step9")
+  @GetMapping("start")
   public String sample39(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
+    this.room.setCount();
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", room.getUsers());
     return "battle.html";
