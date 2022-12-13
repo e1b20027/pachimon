@@ -84,23 +84,28 @@ public class PachimonController {
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("くさ", cnt);
     model.addAttribute("hand", this.room.getHand(cnt));
-    //model.addAttribute("num", cnt);
+    // model.addAttribute("num", cnt);
     model.addAttribute("handsNum", this.room.getHandsNum());
     return "battle.html";
   }
 
- @GetMapping("result")
- public String result(Principal prin, ModelMap model) {
-   String loginUser = prin.getName();
+  @GetMapping("result")
+  public String result(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
     int cnt = this.room.checkSetUser(loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     model.addAttribute("hand", this.room.getHand(cnt));
-    //model.addAttribute("num", cnt);
+    // model.addAttribute("num", cnt);
     model.addAttribute("handsNum", this.room.getHandsNum());
-    String result2 = resultMapper.selectById(this.room.getHand(0), this.room.getHand(1));
-    model.addAttribute("result2", result2);
+    if (cnt == 0) {
+      String result2 = resultMapper.selectp1(this.room.getHand(0), this.room.getHand(1));
+      model.addAttribute("result2", result2);
+    } else if (cnt == 1) {
+      String result2 = resultMapper.selectp2(this.room.getHand(0), this.room.getHand(1));
+      model.addAttribute("result2", result2);
+    }
     return "battle.html";
- }
+  }
 }
