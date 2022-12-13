@@ -7,17 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.pachimon.kaizi.pachimon.model.Room;
+import oit.is.pachimon.kaizi.pachimon.model.ResultMapper;
+import oit.is.pachimon.kaizi.pachimon.model.Result;
 
 @Controller
 @RequestMapping("/pachimon")
 public class PachimonController {
   @Autowired
   private Room room;
+
+  @Autowired
+  ResultMapper resultMapper;
 
   @GetMapping("goHome")
   public String sample31() {
@@ -72,15 +78,29 @@ public class PachimonController {
   @GetMapping("kusa")
   public String kusa(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
-    int cnt=this.room.checkSetUser(loginUser);
+    int cnt = this.room.checkSetUser(loginUser);
     this.room.addUser(loginUser);
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("くさ", cnt);
     model.addAttribute("hand", this.room.getHand(cnt));
-    model.addAttribute("num", cnt);
+    //model.addAttribute("num", cnt);
     model.addAttribute("handsNum", this.room.getHandsNum());
     return "battle.html";
   }
 
+ @GetMapping("result")
+ public String result(Principal prin, ModelMap model) {
+   String loginUser = prin.getName();
+    int cnt = this.room.checkSetUser(loginUser);
+    this.room.addUser(loginUser);
+    model.addAttribute("login_user", loginUser);
+    model.addAttribute("login_users", this.room.getUsers());
+    model.addAttribute("hand", this.room.getHand(cnt));
+    //model.addAttribute("num", cnt);
+    model.addAttribute("handsNum", this.room.getHandsNum());
+    String result2 = resultMapper.selectById(this.room.getHand(0), this.room.getHand(1));
+    model.addAttribute("result2", result2);
+    return "battle.html";
+ }
 }
