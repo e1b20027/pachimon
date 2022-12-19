@@ -24,7 +24,7 @@ public class Room {
     this.users.add(name);
   }
 
-  public int checkSetUser(String name) {
+  public int checkGetUser(String name) {
     int cnt = this.users.indexOf(name);
     return cnt;
   }
@@ -48,11 +48,7 @@ public class Room {
   }
 
   public void setHand(String hand, int cnt) {
-    if(this.count[cnt] == 0){
-      this.hands.add(cnt, hand);
-    } else {
-      this.hands.set(cnt, hand);
-    }
+    this.hands.set(cnt, hand);
     this.count[cnt]++;
   }
 
@@ -61,12 +57,21 @@ public class Room {
     this.count[1] = 0;
   }
 
-  public String getHand(int cnt) {
-    return this.hands.get(cnt);
+  public int getCount() {
+    for(int i=0;i<2;i++){
+      if(this.count[i]==0)
+        return 1;
+    }
+    return 2;
   }
 
-  public int getHandsNum() {
-    return this.hands.size();
+  public void resetHand() {
+    this.hands.add("なし");
+    this.hands.add("なし");
+  }
+
+  public String getHand(int cnt) {
+    return this.hands.get(cnt);
   }
 
 }
