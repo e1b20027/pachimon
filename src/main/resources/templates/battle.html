@@ -7,8 +7,10 @@
 </head>
 
 <body>
+
   <h1>バトル</h1>
-  <h3>ログイン中<div sec:authentication="name"></div></h3>
+  <h3>ログイン中<div sec:authentication="name"></div>
+  </h3>
   <div th:if="${login_user == login_users[0]}">
     <h2>[[${login_users[0]}]] VS [[${login_users[1]}]]</h2>
   </div>
@@ -16,9 +18,15 @@
     <h2>[[${login_users[1]}]] VS [[${login_users[0]}]]</h2>
   </div>
   <div th:if="${hand == null}">
-    <a href="/pachimon/honou">ほのお</a>
-    <a href="/pachimon/mizu">みず</a>
-    <a href="/pachimon/kusa">くさ</a>
+    <a href="/pachimon/honou">
+      <input type="image" name="honou" src="/img/honou.png" alt="honou" width="100" height="100">
+    </a>
+    <a href="/pachimon/mizu">
+      <input type="image" name="mizu" src="/img/mizu.png" alt="mizu" width="100" height="100">
+    </a>
+    <a href="/pachimon/kusa">
+      <input type="image" name="kusa" src="/img/kusa.png" alt="kusa" width="100" height="100">
+    </a>
   </div>
   <div th:if="${hand}">
     <a>あなたの手は[[${hand}]]です</a>
