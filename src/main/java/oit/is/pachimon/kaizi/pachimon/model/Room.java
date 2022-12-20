@@ -24,6 +24,10 @@ public class Room {
     this.users.add(name);
   }
 
+  public void adminUser(String name) {
+    this.users.add(name);
+  }
+
   public int checkGetUser(String name) {
     int cnt = this.users.indexOf(name);
     return cnt;

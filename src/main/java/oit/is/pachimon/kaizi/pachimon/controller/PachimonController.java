@@ -49,6 +49,18 @@ public class PachimonController {
     return "battle.html";
   }
 
+  @GetMapping("startAdmin")
+  public String startAdmin(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.adminUser(loginUser);
+    this.room.adminUser(loginUser);
+    this.room.setCount();
+    this.room.resetHand();
+    model.addAttribute("login_user", loginUser);
+    model.addAttribute("login_users", room.getUsers());
+    return "battle.html";
+  }
+
   @GetMapping("honou")
   public String honou(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
