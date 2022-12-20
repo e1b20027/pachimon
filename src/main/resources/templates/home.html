@@ -13,6 +13,7 @@
   </h3>
   <div sec:authorize="hasRole('ROLE_ADMIN')">
     <span>あなたは管理者ですね</span>
+    <a href="/pachimon/startAdmin">管理者用リンク</a>
   </div>
   <div sec:authorize="hasRole('ROLE_USER')">
     <div>あなたはユーザですね</div>
