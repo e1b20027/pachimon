@@ -109,11 +109,13 @@ public class PachimonController {
   public String honou(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
+    this.room.resetResult();
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("ほのお", cnt);
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("count", this.room.getCount());
+    model.addAttribute("result_count", this.room.getResult());
     return "battle.html";
   }
 
@@ -121,11 +123,13 @@ public class PachimonController {
   public String mizu(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
+    this.room.resetResult();
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("みず", cnt);
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("count", this.room.getCount());
+    model.addAttribute("result_count", this.room.getResult());
     return "battle.html";
   }
 
@@ -133,11 +137,13 @@ public class PachimonController {
   public String kusa(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
+    this.room.resetResult();
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("くさ", cnt);
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("count", this.room.getCount());
+    model.addAttribute("result_count", this.room.getResult());
     return "battle.html";
   }
 
@@ -161,4 +167,11 @@ public class PachimonController {
     return "battle.html";
   }
 
+  @GetMapping("logout2")
+  public String logout(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    int cnt = this.room.checkGetUser(loginUser);// 添え字
+    this.room.removeUser(cnt);
+    return "logout.html";
+  }
 }

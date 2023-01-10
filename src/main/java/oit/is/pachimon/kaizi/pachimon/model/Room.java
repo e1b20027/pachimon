@@ -101,4 +101,8 @@ public class Room {
     this.result[1] = 0;
   }
 
+  public void removeUser(int cnt) {
+    this.users.remove(cnt);
+  }
+
 }
