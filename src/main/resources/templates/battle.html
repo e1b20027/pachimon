@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="refresh" content="3 URL=">
   <title>Pachimonゲーム</title>
 </head>
 
@@ -17,7 +18,7 @@
   <div th:if="${login_user == login_users[1]}">
     <h2>[[${login_users[1]}]] VS [[${login_users[0]}]]</h2>
   </div>
-  <div th:if="${hand == null}">
+  <th:block th:if="${count==0}">
     <a href="/pachimon/honou">
       <input type="image" name="honou" src="/img/honou.png" alt="honou" width="100" height="100">
     </a>
@@ -27,26 +28,29 @@
     <a href="/pachimon/kusa">
       <input type="image" name="kusa" src="/img/kusa.png" alt="kusa" width="100" height="100">
     </a>
-  </div>
-  <div th:if="${hand}">
+  </th:block>
+  <th:block th:if="${count>=1}">
     <a>あなたの手は[[${hand}]]です</a>
-    <th:block th:if="${count==1}">
-      <p>相手の手を待っています</p>
-    </th:block>
-    <th:block th:if="${count==2}">
-      <p><a href="/pachimon/result">結果</a></p>
-      <div th:if="${result2}">
-        <a>あなたの結果は[[${result2}]]です</a>
-        <br>
-        <div th:switch="${result2}">
-          <p th:case="かち" th:text="相手に30のダメージ"></p>
-          <p th:case="まけ" th:text="相手に10のダメージ"></p>
-          <p th:case="あいこ" th:text="相手に20のダメージ"></p>
-        </div>
-          <a href="/pachimon/start">次の手を選ぶ</a>
+  </th:block>
+  <th:block th:if="${count==1}">
+    <p>相手の手を待っています</p>
+  </th:block>
+  <th:block th:if="${count==2}">
+    <p><a href="/pachimon/result">結果</a></p>
+    <div th:if="${result2}">
+      <a>あなたの結果は[[${result2}]]です</a>
+      <br>
+      <div th:switch="${result2}">
+        <p th:case="かち" th:text="相手に30のダメージ"></p>
+        <p th:case="まけ" th:text="相手に10のダメージ"></p>
+        <p th:case="あいこ" th:text="相手に20のダメージ"></p>
       </div>
-    </th:block>
-  </div>
+      <a href="/pachimon/restart">次へ</a>
+      <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/pachimon/startAdmin">管理者用restart</a>
+      </div>
+    </div>
+  </th:block>
 </body>
 
 </html>
