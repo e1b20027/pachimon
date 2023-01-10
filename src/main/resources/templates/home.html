@@ -19,7 +19,6 @@
   <div sec:authorize="hasRole('ROLE_USER')">
     <div>あなたはユーザですね</div>
   </div>
-  <a href="/logout">ログアウト</a>
   <a href="/pachimon/UserNum">参加者一覧</a>
   <div th:if="${room}">
     <ul>
@@ -34,6 +33,7 @@
       <a href="/pachimon/start">ゲーム開始！</a>
     </th:block>
   </div>
+  <p><a href="/pachimon/logout2">ログアウト</a></p>
 </body>
 
 </html>
