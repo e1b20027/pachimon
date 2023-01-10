@@ -12,6 +12,7 @@ public class Room {
   ArrayList<String> hands = new ArrayList<>();
   String hand;
   int[] count = new int[2];
+  int admin = 0;
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -56,12 +57,15 @@ public class Room {
     this.count[cnt]++;
   }
 
-  public void setCount() {
+  public void resetCount() {
     this.count[0] = 0;
     this.count[1] = 0;
   }
 
   public int getCount() {
+    if (this.count[0] == 0 && this.count[1] == 0) {
+      return 0;
+    }
     for(int i=0;i<2;i++){
       if(this.count[i]==0)
         return 1;
@@ -69,9 +73,14 @@ public class Room {
     return 2;
   }
 
+  public void firstSetHand() {
+    this.hands.add("なし");
+    this.hands.add("なし");
+  }
+
   public void resetHand() {
-    this.hands.add("なし");
-    this.hands.add("なし");
+    this.hands.set(0, "なし");
+    this.hands.set(1, "なし");
   }
 
   public String getHand(int cnt) {

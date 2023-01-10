@@ -26,12 +26,12 @@ public class PachimonController {
   ResultMapper resultMapper;
 
   @GetMapping("goHome")
-  public String sample31() {
+  public String gohome() {
     return "home.html";
   }
 
   @GetMapping("UserNum")
-  public String sample38(Principal prin, ModelMap model) {
+  public String usernum(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.addUser(loginUser);
     model.addAttribute("room", this.room);
@@ -40,24 +40,38 @@ public class PachimonController {
   }
 
   @GetMapping("start")
-  public String sample39(Principal prin, ModelMap model) {
+  public String start(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
-    this.room.setCount();
+    this.room.resetCount();
+    this.room.firstSetHand();
+    model.addAttribute("login_user", loginUser);
+    model.addAttribute("login_users", room.getUsers());
+    model.addAttribute("count", this.room.getCount());
+    return "battle.html";
+  }
+
+  @GetMapping("restart")
+  public String restart(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.resetCount();
     this.room.resetHand();
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", room.getUsers());
+    model.addAttribute("count", this.room.getCount());
     return "battle.html";
   }
 
   @GetMapping("startAdmin")
-  public String startAdmin(Principal prin, ModelMap model) {
+  public String startadmin(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     this.room.adminUser(loginUser);
     this.room.adminUser(loginUser);
-    this.room.setCount();
-    this.room.resetHand();
+    this.room.resetCount();
+    this.room.firstSetHand();
+    this.room.setHand("ほのお", 1);
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", room.getUsers());
+    model.addAttribute("count", this.room.getCount());
     return "battle.html";
   }
 
@@ -100,7 +114,7 @@ public class PachimonController {
   @GetMapping("result")
   public String result(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
-    int cnt = this.room.checkGetUser(loginUser);//login_userのlogin_usersの添え字
+    int cnt = this.room.checkGetUser(loginUser);//添え字
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     model.addAttribute("hand", this.room.getHand(cnt));
