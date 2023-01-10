@@ -12,7 +12,7 @@ public class Room {
   ArrayList<String> hands = new ArrayList<>();
   String hand;
   int[] count = new int[2];
-  int admin = 0;
+  int[] result = new int[2];
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -63,9 +63,6 @@ public class Room {
   }
 
   public int getCount() {
-    if (this.count[0] == 0 && this.count[1] == 0) {
-      return 0;
-    }
     for(int i=0;i<2;i++){
       if(this.count[i]==0)
         return 1;
@@ -79,12 +76,29 @@ public class Room {
   }
 
   public void resetHand() {
-    this.hands.set(0, "なし");
-    this.hands.set(1, "なし");
+    hands.set(0, "なし");
+    hands.set(1, "なし");
   }
 
   public String getHand(int cnt) {
     return this.hands.get(cnt);
+  }
+
+  public void setResult(int cnt) {
+    this.result[cnt]++;
+  }
+
+  public int getResult() {
+    for (int i = 0; i < 2; i++) {
+      if (this.result[i] == 0)
+        return 1;
+    }
+    return 2;
+  }
+
+  public void resetResult() {
+    this.result[0] = 0;
+    this.result[1] = 0;
   }
 
 }
