@@ -30,6 +30,22 @@ public class PachimonController {
     return "home.html";
   }
 
+  @GetMapping("goTitle")
+  public String gotitle(Principal prin) {
+    this.room.resetCount();
+    this.room.resetHand();
+    this.room.resetResult();
+    this.room.resetlogout();
+    return "home.html";
+  }
+
+  @GetMapping("title")
+  public String title(Principal prin,ModelMap model) {
+    this.room.setlogout();
+    model.addAttribute("logoutflag", this.room.getlogout());
+    return "battle.html";
+  }
+
   @GetMapping("UserNum")
   public String usernum(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
@@ -46,6 +62,7 @@ public class PachimonController {
     this.room.firstSetHand();
     this.room.resetResult();
     int cnt = this.room.checkGetUser(loginUser);
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", room.getUsers());
@@ -61,6 +78,7 @@ public class PachimonController {
     this.room.resetHand();
     this.room.resetResult();
     int cnt = this.room.checkGetUser(loginUser);
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", room.getUsers());
@@ -78,6 +96,7 @@ public class PachimonController {
     this.room.firstSetHand();
     this.room.resetResult();
     int cnt = this.room.checkGetUser(loginUser);
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("hand", this.room.getHand(cnt));
     this.room.setHand("ほのお", 1);
     model.addAttribute("login_user", loginUser);
@@ -96,6 +115,7 @@ public class PachimonController {
     this.room.resetHand();
     this.room.resetResult();
     int cnt = this.room.checkGetUser(loginUser);
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("hand", this.room.getHand(cnt));
     this.room.setHand("ほのお", 1);
     model.addAttribute("login_user", loginUser);
@@ -110,6 +130,7 @@ public class PachimonController {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
     this.room.resetResult();
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("ほのお", cnt);
@@ -124,6 +145,7 @@ public class PachimonController {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
     this.room.resetResult();
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("みず", cnt);
@@ -138,6 +160,7 @@ public class PachimonController {
     String loginUser = prin.getName();
     int cnt = this.room.checkGetUser(loginUser);
     this.room.resetResult();
+    model.addAttribute("logoutflag", this.room.getlogout());
     model.addAttribute("login_user", loginUser);
     model.addAttribute("login_users", this.room.getUsers());
     this.room.setHand("くさ", cnt);
@@ -157,6 +180,7 @@ public class PachimonController {
     model.addAttribute("hand", this.room.getHand(cnt));
     model.addAttribute("count", this.room.getCount());
     model.addAttribute("result_count", this.room.getResult());
+    model.addAttribute("logoutflag", this.room.getlogout());
     if (cnt == 0) {
       String result2 = resultMapper.selectp1(this.room.getHand(0), this.room.getHand(1));
       model.addAttribute("result2", result2);

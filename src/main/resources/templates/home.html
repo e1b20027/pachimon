@@ -14,22 +14,19 @@
   </h3>
   <div sec:authorize="hasRole('ROLE_ADMIN')">
     <span>あなたは管理者ですね</span>
-    <a href="/pachimon/startAdmin">管理者用リンク</a>
+    <p><a href="/pachimon/startAdmin">管理者用テストリンク</a></p>
   </div>
   <div sec:authorize="hasRole('ROLE_USER')">
     <div>あなたはユーザですね</div>
   </div>
-  <a href="/pachimon/UserNum">参加者一覧</a>
+  <a href="/pachimon/UserNum">マッチング</a>
   <div th:if="${room}">
     <ul>
-      <!--roomオブジェクトのroomNoというフィールドを指定している-->
-      <li>RoomNo:[[${room.roomNo}]]</li>
-      <!--eachは所謂for each．この場合roomオブジェクトのusersフィールドにあるすべてのデータを一通り表示する
-        thが指定されているので[]が不要になる-->
-      <li th:each="user : ${room.users}">[[${user}]]</li>
       <li>現在ログイン人数:[[${usersNum}]]</li>
+      <li th:each="user : ${room.users}">[[${user}]]</li>
     </ul>
     <th:block th:if="${usersNum==2}">
+      <p><a>対戦相手が見つかりました</a></p>
       <a href="/pachimon/start">ゲーム開始！</a>
     </th:block>
   </div>
