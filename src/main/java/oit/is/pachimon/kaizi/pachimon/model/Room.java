@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Room {
   ArrayList<String> users = new ArrayList<>();
-  int roomNo = 99;
   ArrayList<String> hands = new ArrayList<>();
   String hand;
   int[] count = new int[2];
   int[] result = new int[2];
+  int logoutflag=0;
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -32,16 +32,6 @@ public class Room {
   public int checkGetUser(String name) {
     int cnt = this.users.indexOf(name);
     return cnt;
-  }
-
-  // 以降はフィールドのgetter/setter
-  // これらがないとThymeleafで値を取得できない
-  public int getRoomNo() {
-    return roomNo;
-  }
-
-  public void setRoomNo(int roomNo) {
-    this.roomNo = roomNo;
   }
 
   public ArrayList<String> getUsers() {
@@ -103,6 +93,18 @@ public class Room {
 
   public void removeUser(int cnt) {
     this.users.remove(cnt);
+  }
+
+  public void resetlogout() {
+    this.logoutflag = 0;
+  }
+
+  public void setlogout() {
+    this.logoutflag = 1;
+  }
+
+  public int getlogout() {
+    return this.logoutflag;
   }
 
 }
