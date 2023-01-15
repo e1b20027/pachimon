@@ -21,19 +21,22 @@
     <th:block th:if="${hand=='なし'}">
       <a href="/pachimon/honou">
         <input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100">
-
       </a>
       <a href="/pachimon/mizu">
         <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
-
+      </a>
+      <a href="/pachimon/mizu">
+        <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
+      </a>
+      <a href="/pachimon/mizu">
+        <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
       </a>
       <a href="/pachimon/kusa">
         <input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100">
-
       </a>
     </th:block>
     <th:block th:if="${hand!='なし'}">
-      <a>あなたの手は[[${hand}]]です</a>
+      <a>[[${hand}]]を選択しました</a>
       <th:block th:if="${count==1}">
         <p>相手の手を待っています</p>
       </th:block>
@@ -41,8 +44,18 @@
     <th:block th:if="${count==2}">
       <p><a href="/pachimon/result">結果</a></p>
       <div th:if="${result2}">
-        <a>あなたの結果は[[${result2}]]です</a>
-        <br>
+        <p><a>　 あなた　　　 あいて</a></p>
+        <a th:switch="${player1_hand}">
+          <a th:case="ほのお"><input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100"></a>
+          <a th:case="みず"><input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100"></a>
+          <a th:case="くさ"><input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100"></a>
+        </a>
+        <a th:switch="${player2_hand}">
+          <a th:case="ほのお"><input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100"></a>
+          <a th:case="みず"><input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100"></a>
+          <a th:case="くさ"><input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100"></a>
+        </a>
+        <p><a>[[${result2}]]です</a></p>
         <div th:switch="${result2}">
           <p th:case="かち" th:text="相手に30のダメージ"></p>
           <p th:case="まけ" th:text="相手に10のダメージ"></p>

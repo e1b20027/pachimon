@@ -184,9 +184,13 @@ public class PachimonController {
     if (cnt == 0) {
       String result2 = resultMapper.selectp1(this.room.getHand(0), this.room.getHand(1));
       model.addAttribute("result2", result2);
+      model.addAttribute("player1_hand", this.room.getHand(0));
+      model.addAttribute("player2_hand", this.room.getHand(1));
     } else if (cnt == 1) {
       String result2 = resultMapper.selectp2(this.room.getHand(0), this.room.getHand(1));
       model.addAttribute("result2", result2);
+      model.addAttribute("player1_hand", this.room.getHand(1));
+      model.addAttribute("player2_hand", this.room.getHand(0));
     }
     return "battle.html";
   }
