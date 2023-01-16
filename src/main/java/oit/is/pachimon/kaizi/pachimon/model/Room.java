@@ -12,7 +12,12 @@ public class Room {
   String hand;
   int[] count = new int[2];
   int[] result = new int[2];
-  int logoutflag=0;
+  int logoutflag = 0;
+  int[] hflag = new int[2];
+  int[] kflag = new int[2];
+  int[] mflag = new int[2];
+  int[] m1flag = new int[2];
+  int[] m2flag = new int[2];
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -105,6 +110,71 @@ public class Room {
 
   public int getlogout() {
     return this.logoutflag;
+  }
+
+  public void reseth() {
+    this.hflag[0] = 0;
+    this.hflag[1] = 0;
+  }
+
+  public void seth(int cnt) {
+    this.hflag[cnt]=1;
+  }
+
+  public int geth(int cnt) {
+    return this.hflag[cnt];
+  }
+
+  public void resetm() {
+    this.mflag[0] = 0;
+    this.mflag[1] = 0;
+  }
+
+  public void setm(int cnt) {
+    this.mflag[cnt]=1;
+  }
+
+  public int getm(int cnt) {
+    return this.mflag[cnt];
+  }
+
+  public void resetm1() {
+    this.m1flag[0] = 0;
+    this.m1flag[1] = 0;
+  }
+
+  public void setm1(int cnt) {
+    this.m1flag[cnt] = 1;
+  }
+
+  public int getm1(int cnt) {
+    return this.m1flag[cnt];
+  }
+
+  public void resetm2() {
+    this.m2flag[0] = 0;
+    this.m2flag[1] = 0;
+  }
+
+  public void setm2(int cnt) {
+    this.m2flag[cnt] = 1;
+  }
+
+  public int getm2(int cnt) {
+    return this.m2flag[cnt];
+  }
+
+  public void resetk() {
+    this.kflag[0] = 0;
+    this.kflag[1] = 0;
+  }
+
+  public void setk(int cnt) {
+    this.kflag[cnt]=1;
+  }
+
+  public int getk(int cnt) {
+    return this.kflag[cnt];
   }
 
 }
