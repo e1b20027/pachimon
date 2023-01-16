@@ -19,21 +19,34 @@
       <h2>[[${login_users[1]}]] VS [[${login_users[0]}]]</h2>
     </div>
     <th:block th:if="${hand=='なし'}">
-      <a href="/pachimon/honou">
-        <input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100">
-      </a>
-      <a href="/pachimon/mizu">
-        <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
-      </a>
-      <a href="/pachimon/mizu">
-        <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
-      </a>
-      <a href="/pachimon/mizu">
-        <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
-      </a>
-      <a href="/pachimon/kusa">
-        <input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100">
-      </a>
+      <th:block th:if="${handh==0}">
+        <a href="/pachimon/honou">
+          <input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100">
+        </a>
+      </th:block>
+      <th:block th:if="${handm==0}">
+        <a href="/pachimon/mizu">
+          <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
+        </a>
+      </th:block>
+      <th:block th:if="${handm1==0}">
+        <a href="/pachimon/mizu1">
+          <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
+        </a>
+      </th:block>
+      <th:block th:if="${handm2==0}">
+        <a href="/pachimon/mizu2">
+          <input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100">
+        </a>
+      </th:block>
+      <th:block th:if="${handk==0}">
+        <a href="/pachimon/kusa">
+          <input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100">
+        </a>
+      </th:block>
+      <th:block th:if="${handh==1&&handk==1&&handm==1&&handm1==1&&handm2==1}">
+        <p><a href="/pachimon/restart2">手札をリセット</a></p>
+      </th:block>
     </th:block>
     <th:block th:if="${hand!='なし'}">
       <a>[[${hand}]]を選択しました</a>
@@ -46,14 +59,30 @@
       <div th:if="${result2}">
         <p><a>　 あなた　　　 あいて</a></p>
         <a th:switch="${player1_hand}">
-          <a th:case="ほのお"><input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100"></a>
+          <a th:case="ほのお">
+            <th:block th:if="${player2_hand=='くさ'}"><input type="image" name="honou" src="/img/honou2.PNG" alt="honou" width="100" height="100"></th:block><th:block th:unless="${player2_hand=='くさ'}"><input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100"></th:block>
+          </a>
           <a th:case="みず"><input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100"></a>
-          <a th:case="くさ"><input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100"></a>
+          <a th:case="くさ">
+            <th:block th:if="${player2_hand=='ほのお'}"><input type="image" name="kusa" src="/img/kusa2.PNG" alt="kusa" width="100"
+            height="100"></th:block><th:block th:unless="${player2_hand=='ほのお'}"><input type="image" name="honou" src="/img/kusa.PNG" alt="honou"
+            width="100" height="100"></th:block>
+          </a>
         </a>
         <a th:switch="${player2_hand}">
-          <a th:case="ほのお"><input type="image" name="honou" src="/img/honou.PNG" alt="honou" width="100" height="100"></a>
+          <a th:case="ほのお">
+            <th:block th:if="${player1_hand=='くさ'}"><input type="image" name="honou" src="/img/honou2.PNG" alt="honou" width="100"
+            height="100"></th:block>
+            <th:block th:unless="${player1_hand=='くさ'}"><input type="image" name="honou" src="/img/honou.PNG" alt="honou"
+            width="100" height="100"></th:block>
+          </a>
           <a th:case="みず"><input type="image" name="mizu" src="/img/mizu.PNG" alt="mizu" width="100" height="100"></a>
-          <a th:case="くさ"><input type="image" name="kusa" src="/img/kusa.PNG" alt="kusa" width="100" height="100"></a>
+          <a th:case="くさ">
+            <th:block th:if="${player1_hand=='ほのお'}"><input type="image" name="kusa" src="/img/kusa2.PNG" alt="kusa" width="100"
+            height="100"></th:block>
+            <th:block th:unless="${player1_hand=='ほのお'}"><input type="image" name="honou" src="/img/kusa.PNG" alt="honou"
+            width="100" height="100"></th:block>
+          </a>
         </a>
         <p><a>[[${result2}]]です</a></p>
         <div th:switch="${result2}">
@@ -65,7 +94,7 @@
           <p><a href="/pachimon/restart">次へ</a></p>
         </th:block>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-          <p><a href="/pachimon/restartAdmin">管理者用restart</a></p>
+          <p><a href="/pachimon/restartAdmin">管理者用テストrestart</a></p>
         </div>
       </div>
     </th:block>
