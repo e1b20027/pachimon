@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="3 URL=">
+  <!-- <meta http-equiv="refresh" content="5"> -->
   <title>Pachimonゲーム</title>
 </head>
 
@@ -14,9 +14,13 @@
     </h3>
     <div th:if="${login_user == login_users[0]}">
       <h2>[[${login_users[0]}]] VS [[${login_users[1]}]]</h2>
+      <p><a>あなたの点数:[[${player1_score}]]</a></p>
+      <p><a>あいての点数:[[${player2_score}]]</a></p>
     </div>
     <div th:if="${login_user == login_users[1]}">
       <h2>[[${login_users[1]}]] VS [[${login_users[0]}]]</h2>
+      <p><a>あなたの点数:[[${player2_score}]]</a></p>
+      <p><a>あいての点数:[[${player1_score}]]</a></p>
     </div>
     <th:block th:if="${hand=='なし'}">
       <th:block th:if="${handh==0}">
@@ -45,7 +49,17 @@
         </a>
       </th:block>
       <th:block th:if="${handh==1&&handk==1&&handm==1&&handm1==1&&handm2==1}">
-        <p><a href="/pachimon/restart2">手札をリセット</a></p>
+        <th:block th:if="${login_user == login_users[0]}">
+          <th:block th:if="${player1_score>player2_score}">かち</th:block>
+          <th:block th:if="${player1_score==player2_score}">引き分け</th:block>
+          <th:block th:if="${player1_score<player2_score}">まけ</th:block>
+        </th:block>
+        <th:block th:if="${login_user == login_users[1]}">
+          <th:block th:if="${player2_score>player1_score}">かち</th:block>
+          <th:block th:if="${player2_score==player1_score}">引き分け</th:block>
+          <th:block th:if="${player2_score<player1_score}">まけ</th:block>
+        </th:block>
+        <p><a href="/pachimon/title">ゲームを終了</a></p>
       </th:block>
     </th:block>
     <th:block th:if="${hand!='なし'}">
@@ -86,9 +100,9 @@
         </a>
         <p><a>[[${result2}]]です</a></p>
         <div th:switch="${result2}">
-          <p th:case="かち" th:text="相手に30のダメージ"></p>
-          <p th:case="まけ" th:text="相手に10のダメージ"></p>
-          <p th:case="あいこ" th:text="相手に20のダメージ"></p>
+          <p th:case="かち"><th:block th:if="${player1_hand=='くさ'&&player2_hand=='ほのお'||player2_hand=='くさ'&&player1_hand=='ほのお'}">10ポイント</th:block><th:block th:unless="${player1_hand=='くさ'&&player2_hand=='ほのお'||player2_hand=='くさ'&&player1_hand=='ほのお'}"><a>3ポイント</a></th:block></p>
+          <p th:case="まけ"><a>1ポイント</a></p>
+          <p th:case="あいこ"><a>2ポイント</a></p>
         </div>
         <th:block th:if="${result_count==2}">
           <p><a href="/pachimon/restart">次へ</a></p>
@@ -98,7 +112,6 @@
         </div>
       </div>
     </th:block>
-    <p><a href="/pachimon/title">ゲームを終了</a></p>
   </th:block>
   <th:block th:if="${logoutflag==1}">
     <p><a>どちらかのプレイヤーがゲームを終了しました</a></p>
