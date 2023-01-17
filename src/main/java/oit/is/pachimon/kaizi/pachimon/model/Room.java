@@ -10,6 +10,7 @@ public class Room {
   ArrayList<String> users = new ArrayList<>();
   ArrayList<String> hands = new ArrayList<>();
   String hand;
+  int[] flag = new int[2];
   int[] count = new int[2];
   int[] result = new int[2];
   int logoutflag = 0;
@@ -18,6 +19,7 @@ public class Room {
   int[] mflag = new int[2];
   int[] m1flag = new int[2];
   int[] m2flag = new int[2];
+  int[] score = new int[2];
 
   public void addUser(String name) {
     // 同名のユーザが居たら何もせずにreturn
@@ -175,6 +177,32 @@ public class Room {
 
   public int getk(int cnt) {
     return this.kflag[cnt];
+  }
+
+  public void resetscore() {
+    this.score[0] = 0;
+    this.score[1] = 0;
+  }
+
+  public void setscore(int cnt,int add) {
+    this.score[cnt]=this.score[cnt]+add;
+  }
+
+  public int getscore(int cnt) {
+    return this.score[cnt];
+  }
+
+  public void resetflag() {
+    this.flag[0] = 0;
+    this.flag[1] = 0;
+  }
+
+  public void setflag(int cnt) {
+    this.flag[cnt] = 1;
+  }
+
+  public int getflag(int cnt) {
+    return this.flag[cnt];
   }
 
 }
